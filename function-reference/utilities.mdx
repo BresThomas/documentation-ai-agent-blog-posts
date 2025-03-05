@@ -1,0 +1,27 @@
+---
+title: Utilities
+description: "Overview of utility functions used in AI Blog Creator."
+---
+
+## Utility Functions
+
+### `remove_leading_number(title: str) -> str`
+- **Purpose:** Removes any leading numbering from a title.  
+- **Example:**  
+  ```python
+  remove_leading_number("1. Introduction")  # returns "Introduction"
+  ```
+
+### `create_slug_from_title(title: str) -> str`
+- **Purpose:** Converts a blog post title into a URL-friendly slug (e.g., "AI Blog Creator" → "ai-blog-creator").  
+- **Example:**  
+  ```python
+  create_slug_from_title("AI Blog Creator")  # returns "ai-blog-creator"
+  ```
+
+### `escape_yaml_string(text: str) -> str`
+- **Purpose:** Escapes characters to ensure text is safely included in YAML front matter.  
+- **Example:**  
+  ```python
+  escape_yaml_string('This is a "test"')  # returns 'This is a \"test\"'
+  ```

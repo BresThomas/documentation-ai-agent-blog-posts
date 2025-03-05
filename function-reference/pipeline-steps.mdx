@@ -1,0 +1,75 @@
+---
+title: Pipeline Steps
+description: "Detailed breakdown of each step in the content generation pipeline."
+---
+
+## Content Generation Pipeline
+
+The AI Blog Creator follows a series of steps to create and refine blog posts.
+
+### 1. Title Generation
+- **Function:** `generate_titles`
+- **Description:** Uses AI to propose five creative blog post titles based on a given niche and optional instructions.
+- **Inputs:**  
+  - `niche`: Blog topic or niche.  
+  - `comment`: Additional user instructions.
+- **Output:** A list of title strings with any leading numbering removed.
+
+### 2. Outline Creation
+- **Function:** `generate_outline`
+- **Description:** Generates a detailed outline for the chosen blog title, including headings and subheadings.
+- **Input:**  
+  - `chosen_title`: The selected blog title.
+- **Output:** A string containing the outline.
+
+### 3. Draft Writing
+- **Function:** `write_draft`
+- **Description:** Expands the outline into a full blog post draft using a specific brand voice.
+- **Inputs:**  
+  - `outline`: The detailed outline.  
+  - `brand_voice`: The desired tone (e.g., Professional, Casual).
+- **Output:** A complete draft of the blog post.
+
+### 4. SEO Optimization
+- **Function:** `optimize_for_seo`
+- **Description:** Enhances the draft by incorporating SEO keywords and generating meta title/description suggestions.
+- **Inputs:**  
+  - `draft`: The initial draft.  
+  - `keywords`: A list of SEO keywords.
+- **Output:** A tuple with the optimized content, meta title, and meta description.
+
+### 5. Fact-Check & Edit
+- **Function:** `edit_and_fact_check`
+- **Description:** Refines the SEO-optimized draft by correcting grammar, flagging uncited claims, and improving overall clarity.
+- **Input:**  
+  - `draft`: The SEO-optimized draft.
+- **Output:** The edited and fact-checked text.
+
+### 6. Excerpt & Tags Generation
+- **Function:** `generate_excerpt_and_tags`
+- **Description:** Generates a short excerpt and a set of tags (up to five) for the blog post.
+- **Input:**  
+  - `final_article`: The final edited article.
+- **Output:** A tuple containing the excerpt and a list of tags.
+
+### 7. Translation
+- **Function:** `translate_text`
+- **Description:** Translates the given text into a target language, preserving meaning and formatting.
+- **Inputs:**  
+  - `text`: The text to translate.  
+  - `target_language`: Language code (e.g., "es", "fr").
+- **Output:** Translated text.
+
+### 8. Markdown Creation
+- **Function:** `create_markdown_content`
+- **Description:** Formats the blog post content into markdown with YAML front matter (title, date, excerpt, cover image, tags).
+- **Inputs:**  
+  - `title`, `content`, `excerpt`, `cover_image_url`, `tags`  
+  - Optionally: `meta_title`, `meta_description`
+- **Output:** A markdown string ready for file storage.
+
+### 9. File Handling & Git Integration
+- **Functions:**  
+  - `store_local_markdown`: Saves the markdown file locally within the repository.  
+  - `git_commit_and_push`: Commits and pushes changes to a Git repository.
+- **Description:** These functions handle saving the generated content and maintaining version control.

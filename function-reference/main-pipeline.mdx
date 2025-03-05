@@ -1,0 +1,51 @@
+---
+title: Main Pipeline
+description: "Orchestration of the content generation process."
+---
+
+## Main Pipeline Function
+
+### `run_article_pipeline`
+
+This core function orchestrates the entire blog post creation process.
+
+- **Inputs:**
+  - `llm`: An instance of the AI language model (`ChatOpenAI`).
+  - `chosen_title`: The title selected from the generated options.
+  - `brand_voice`: The desired tone of the article (e.g., professional, casual).
+  - `keywords`: A list of SEO keywords.
+  - `cover_image`: URL of the blog post’s cover image.
+  - `repo_path`: Local repository path for storing markdown files.
+  - `content_folder`: The folder within the repository to store content.
+  - `languages`: List of language codes for translation (includes "en" by default).
+
+- **Process Overview:**
+  1. **Slug Creation:** Converts the title into a URL-friendly slug.
+  2. **Content Generation:**  
+     - Generates an outline, initial draft, and SEO-optimized content.
+     - Edits the draft for clarity and accuracy.
+     - Generates an excerpt and a set of tags.
+  3. **Translation:** Translates content into additional languages if specified.
+  4. **Markdown Formatting:** Formats the final content with YAML front matter.
+  5. **File Storage:** Saves the formatted content as markdown files.
+  6. **URL Generation:** Constructs URLs for accessing the blog posts.
+
+- **Output:** Returns a dictionary containing:
+  - `slug`: The generated slug.
+  - `outline`: The generated outline.
+  - `final_draft`: The final edited content.
+  - `created_files`: Paths to the saved markdown files.
+  - `published_urls`: URLs for the published blog posts.
+
+### `main`
+
+The `main` function ties everything together by:
+- Rendering a Streamlit UI to collect user input.
+- Invoking the pipeline functions.
+- Optionally committing and pushing changes to Git.
+
+This modular design allows for easy customization or extension of the pipeline.
+
+---
+
+These files should give you a strong foundation to document your AI Blog Creator project. You can expand or modify each section as needed to reflect updates or additional details about your implementation.
